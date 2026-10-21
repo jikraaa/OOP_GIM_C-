@@ -93,13 +93,53 @@ namespace KerangkaGame
         //    Console.WriteLine($"Posisi Sekarang : {posisiSekarang}");
         //}
 
-        public void Aksi(int posisiAwal)
+        //public void Aksi(int posisiAwal)
+        //{
+        //    int posisi = posisiAwal;
+
+        //    Console.WriteLine($"Posisi: {posisi}");
+
+        //    while (true)
+        //    {
+        //        ConsoleKeyInfo tombol = Console.ReadKey(true);
+
+        //        if (tombol.Key == ConsoleKey.RightArrow)
+        //        {
+        //            posisi += 2;
+        //        }
+        //        else if (tombol.Key == ConsoleKey.LeftArrow)
+        //        {
+        //            if (posisi > 0)
+        //            {
+        //                posisi -= 1;
+        //            }
+        //            else
+        //            {
+        //                continue;
+        //            }
+        //        }
+        //        else if (tombol.Key == ConsoleKey.Escape)
+        //        {
+        //            Console.WriteLine("Permainan Berakhir");
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            continue;
+        //        }
+
+        //        Console.WriteLine($"Posisi: {posisi}");
+        //    }
+        //}
+
+        class Program
         {
-            int posisi = posisiAwal;
+        static void Main()
+        {
+            int posisi = 0;
+            bool bermain = true;
 
-            Console.WriteLine($"Posisi: {posisi}");
-
-            while (true)
+            while (bermain)
             {
                 ConsoleKeyInfo tombol = Console.ReadKey(true);
 
@@ -109,31 +149,19 @@ namespace KerangkaGame
                 }
                 else if (tombol.Key == ConsoleKey.LeftArrow)
                 {
-                    if (posisi > 0)
-                    {
-                        posisi -= 1;
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                    posisi -= 1;
                 }
                 else if (tombol.Key == ConsoleKey.Escape)
                 {
-                    Console.WriteLine("Permainan Berakhir");
-                    break;
-                }
-                else
-                {
-                    continue;
+                    bermain = false;
                 }
 
-                Console.WriteLine($"Posisi: {posisi}");
+                Console.WriteLine("Posisi: " + posisi);
             }
         }
-
-
     }
+
+}
 
 
     class MainProgram
@@ -150,7 +178,7 @@ namespace KerangkaGame
             Karakter musuh = new Karakter("Nanana", 100, 100);
             player1.Serang(musuh);
             musuh.Healing(20);
-            player1.Aksi(0);
+            //player1.Aksi(0);
             //player1.getData();
 
 
