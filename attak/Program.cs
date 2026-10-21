@@ -14,33 +14,42 @@ namespace KerangkaGame
         public int kesehatan { get; private set; }
         public int senjata { get; private set; }
 
+
         // membuat constructor
-        public Karakter(string nama, int kesehatan, int senjata, int tambahKesehatan)
+        public Karakter(string nama, int kesehatan, int senjata)
         {
             this.nama = nama;
             this.kesehatan = kesehatan;
             this.senjata = senjata;
-            this.kesehatan += tambahKesehatan;
+
         }
 
         public void Serang(Karakter target) // membuat method menyerang
         {
-            Console.WriteLine("===> MULAI SERANGAN");
+            Console.WriteLine("===> MULAI SERANGAN <===");
             target.TerimaSerangan(this.senjata);
         }
 
         public void TerimaSerangan(int jumlahSerangan) // objek menerima serangan 
         {
             kesehatan -= jumlahSerangan;
-            Console.WriteLine($"{nama} diserang dengan {jumlahSerangan}. Sisa kesehatan {kesehatan}");
+            Console.WriteLine($"{nama} diserang dengan : {jumlahSerangan} Serangan");
+            Console.WriteLine($"Sisa kesehatan : {kesehatan}");
         }
 
-        public void Healing()
+        public void PilihanPenyembuhan()
         {
-            kesehatan += 20;
-            Console.WriteLine($"{nama} heal HP,Kesehatan sekarang {kesehatan}");
-        }
+            Console.WriteLine("Ada Pilihan Penyembuhan ");
+            Console.WriteLine($"Sembuhkan {nama} ?");
 
+            //string pilihan = Console.ReadLine();
+
+            //if (pilihan == "yes")
+            //{
+            //    Healing(20);
+            //}
+            //else belum selesai
+        }
         //public int totalSenjata { get; private set; }
         //public int power { get; private set; }
 
@@ -67,18 +76,84 @@ namespace KerangkaGame
             Console.WriteLine($"Karakter : {nama}");
         }
 
+        public void Healing(int tambahKesehatan)
+        {
+            kesehatan += tambahKesehatan;
+            Console.WriteLine($"Disembuhkan {kesehatan}");
+        }
+
+
+        //public void Aksi(int posisiAwal)
+        //{
+        //    Console.Write("Masukkan posisi sekarang: ");
+        //    int posisiSekarang = int.Parse(Console.ReadLine());
+
+        //    Console.WriteLine($"Karakter : {nama}");
+        //    Console.WriteLine($"Posisi Awal : {posisiAwal}");
+        //    Console.WriteLine($"Posisi Sekarang : {posisiSekarang}");
+        //}
+
+        public void Aksi(int posisiAwal)
+        {
+            int posisi = posisiAwal;
+
+            Console.WriteLine($"Posisi: {posisi}");
+
+            while (true)
+            {
+                ConsoleKeyInfo tombol = Console.ReadKey(true);
+
+                if (tombol.Key == ConsoleKey.RightArrow)
+                {
+                    posisi += 2;
+                }
+                else if (tombol.Key == ConsoleKey.LeftArrow)
+                {
+                    if (posisi > 0)
+                    {
+                        posisi -= 1;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (tombol.Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine("Permainan Berakhir");
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+
+                Console.WriteLine($"Posisi: {posisi}");
+            }
+        }
+
+
     }
+
 
     class MainProgram
     {
         static void Main(string[] args)
         {
-            Karakter player1 = new Karakter("Jikra", 100, 10); //membuat objek (kalo udah ada constructor kita ga usah pake get data)
-            Karakter musuh = new Karakter("jikro", 100, 100);
-
-            //interaksi
+            //player Utama
+            Karakter player1 = new Karakter("Kinan", 100, 10); //membuat objek (kalo udah ada constructor kita ga usah pake get data)
+            //player1.nama = "Kinan";
+            //player1.kesehatan = "Sehat";
+            //player1.senjata = "Panah";
+            //player1.totalSenjata = 3;
+            //player1.power = 50;
+            Karakter musuh = new Karakter("Nanana", 100, 100);
             player1.Serang(musuh);
-            musuh.Serang(player1);
+            musuh.Healing(20);
+            player1.Aksi(0);
+            //player1.getData();
+
+
 
             // kode sebelumnya 
             //Karakter karakter1 = new Karakter();
@@ -114,7 +189,7 @@ namespace KerangkaGame
             ////menampilkan data dari array, foreach
             //foreach(Karakter player in daftaHero)
             //{
-            //    player.getData();
+            //    player.getData();l
             //}
 
 
