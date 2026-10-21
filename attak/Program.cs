@@ -82,47 +82,92 @@ namespace KerangkaGame
             Console.WriteLine($"Dipulihkan {kesehatan}");
         }
 
-
-        //public void Aksi(int posisiAwal)
-        //{
-        //    Console.Write("Masukkan posisi sekarang: ");
-        //    int posisiSekarang = int.Parse(Console.ReadLine());
-
-        //    Console.WriteLine($"Karakter : {nama}");
-        //    Console.WriteLine($"Posisi Awal : {posisiAwal}");
-        //    Console.WriteLine($"Posisi Sekarang : {posisiSekarang}");
-        //}
-
-        class Program
+        public void Aksi(int posisiAwal)
         {
-        static void Main()
-        {
-            int posisi = 0;
-            bool bermain = true;
+            Console.WriteLine("PILIH CARA MAIN");
+            Console.WriteLine("1. Tombol Panah Keyboard");
+            Console.WriteLine("2. Input Angka Posisi");
+            Console.Write("Pilih mode (1/2): ");
 
-            while (bermain)
+            string pilihan = Console.ReadLine();
+
+            int posisi = posisiAwal;
+
+            if (pilihan == "1")
             {
-                ConsoleKeyInfo tombol = Console.ReadKey(true);
+                Console.WriteLine("Mode Tombol Panah");
+                Console.WriteLine("Panah Kanan = maju 2");
+                Console.WriteLine("Panah Kiri = mundur 1");
+                Console.WriteLine("ESC = keluar");
+                Console.WriteLine($"Posisi: {posisi}");
 
-                if (tombol.Key == ConsoleKey.RightArrow)
+                while (true)
                 {
-                    posisi += 2;
-                }
-                else if (tombol.Key == ConsoleKey.LeftArrow)
-                {
-                    posisi -= 1;
-                }
-                else if (tombol.Key == ConsoleKey.Escape)
-                {
-                    bermain = false;
-                }
+                    ConsoleKeyInfo tombol = Console.ReadKey(true);
 
-                Console.WriteLine("Posisi: " + posisi);
+                    if (tombol.Key == ConsoleKey.RightArrow)
+                    {
+                        posisi += 2;
+                    }
+                    else if (tombol.Key == ConsoleKey.LeftArrow)
+                    {
+                        if (posisi > 0)
+                            posisi -= 1;
+                        else
+                            continue;
+                    }
+                    else if (tombol.Key == ConsoleKey.Escape)
+                    {
+                        Console.WriteLine("Permainan Berakhir");
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine($"Posisi: {posisi}");
+                }
+            }
+            else if (pilihan == "2")
+            {
+                Console.WriteLine("Mode Input Angka");
+
+                while (true)
+                {
+                    Console.Write("Masukkan posisi baru (ketik -1 untuk mengakhiri): ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int posisiBaru))
+                    {
+                        Console.WriteLine("Masukkan angka sesuai!");
+                        continue;
+                    }
+
+                    if (posisiBaru == -1)
+                    {
+                        Console.WriteLine("Permainan Berakhir");
+                        break;
+                    }
+
+                    if (posisiBaru < 0)
+                    {
+                        Console.WriteLine("Posisi tidak boleh kurang dari 0!");
+                        continue;
+                    }
+
+                    posisi = posisiBaru;
+                    Console.WriteLine($"Posisi: {posisi}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Pilihan tidak sesuai!");
             }
         }
-    }
 
-}
+
+
+    }
 
 
     class MainProgram
@@ -130,16 +175,16 @@ namespace KerangkaGame
         static void Main(string[] args)
         {
             //player Utama
-            Karakter player1 = new Karakter("jikrorrr", 100, 10); //membuat objek (kalo udah ada constructor kita ga usah pake get data)
+            Karakter player1 = new Karakter("jikraaaa", 100, 10); //membuat objek (kalo udah ada constructor kita ga usah pake get data)
             //player1.nama = "Kinan";
             //player1.kesehatan = "Sehat";
             //player1.senjata = "Panah";
             //player1.totalSenjata = 3;
             //player1.power = 50;
-            Karakter musuh = new Karakter("kinan", 100, 100);
+            Karakter musuh = new Karakter("jikrooo", 100, 100);
             player1.Serang(musuh);
             musuh.Healing(20);
-            //player1.Aksi(0);
+            player1.Aksi(0);
             //player1.getData();
 
 
